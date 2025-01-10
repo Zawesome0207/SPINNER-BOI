@@ -8,15 +8,19 @@ public class Enemy : MonoBehaviour
     //public float moveSpeed;
 
     private bool canDash;
-    private float dashCooldown;
+    public float dashCooldown;
+    public float dashChargeTime;
     public CircleCollider2D playerDashCollider;
 
     public GameObject spinner;
     public GameObject topPiece;
     public GameObject bottomPiece;
-    public int speed;
+    public float speed;
     public int rotationSpeed;
     public int maxRotationVel;
+
+    private Rigidbody2D topRigid;
+    private Rigidbody2D bottomRigid;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,14 +28,14 @@ public class Enemy : MonoBehaviour
         Application.targetFrameRate = 60;
 
         canDash = true;
+
+        topRigid = topPiece.GetComponent<Rigidbody2D>();
+        bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D topRigid = topPiece.GetComponent<Rigidbody2D>();
-        Rigidbody2D bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
-
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
             topRigid.AddTorque(rotationSpeed);
@@ -43,11 +47,15 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider playerDashCollider)
     {
+        Debug.Log("trigger");
+
         if (canDash)
         {
             canDash = false;
 
+            speed = speed / 3;
 
+            Invoke(nameof(dash), dashChargeTime);
             Invoke(nameof(resetDash), dashCooldown);
         }
     }
@@ -55,5 +63,12 @@ public class Enemy : MonoBehaviour
     private void resetDash()
     {
         canDash = true;
+    }
+
+    private void dash()
+    {
+        speed = speed * 3;
+
+        topRigid.AddForce((player.position - topPiece.transform.position) * 1000, ForceMode2D.Impulse);
     }
 }
