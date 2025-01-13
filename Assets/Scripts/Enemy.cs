@@ -38,7 +38,11 @@ public class Enemy : MonoBehaviour
             bottomRigid.AddTorque(rotationSpeed);
         }
 
-        topRigid.AddForce((player.position - topPiece.transform.position) * speed, ForceMode2D.Impulse);
+        //topRigid.AddForce((player.position - topPiece.transform.position) * speed, ForceMode2D.Impulse);
+        float posNumMathX = player.position.x - topPiece.transform.position.x;
+        float posNumMathY = player.position.y - topPiece.transform.position.y;
+        float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
+        topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed, (posNumMathY / posNumMathAbs) * speed));
     }
 
     private void OnTriggerEnter(Collider playerDashCollider)
