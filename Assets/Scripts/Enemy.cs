@@ -3,10 +3,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float health;
+    public int damage;
 
     public Transform player;
     //public float moveSpeed;
-
+    public Player playerScript;
     private bool canDash;
     private float dashCooldown;
     public CircleCollider2D playerDashCollider;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
     public int speed;
     public int rotationSpeed;
     public int maxRotationVel;
+    public Rigidbody2D playersRigid;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,10 +56,24 @@ public class Enemy : MonoBehaviour
 
             Invoke(nameof(resetDash), dashCooldown);
         }
+
     }
 
     private void resetDash()
     {
         canDash = true;
+    }
+    public int getDamage()
+    {
+        return damage;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log("Ehit");
+        if (collision.gameObject.tag == "Player Spike")
+        {
+            Debug.Log("Ehit");
+            health -= (playersRigid.angularVelocity) * playerScript.getDamage() /100;
+        }
     }
 }
