@@ -3,77 +3,77 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float health;
+    public int damage;
 
     public Transform player;
     //public float moveSpeed;
-
-    private DashEnemy dashTrigger;
+    public Player playerScript;
     private bool canDash;
-    public float dashCooldown;
-    public float dashChargeTime;
+    private float dashCooldown;
+    public CircleCollider2D playerDashCollider;
 
     public GameObject spinner;
     public GameObject topPiece;
     public GameObject bottomPiece;
-    public float speed;
+    public int speed;
     public int rotationSpeed;
     public int maxRotationVel;
-
-    private Rigidbody2D topRigid;
-    private Rigidbody2D bottomRigid;
+    public Rigidbody2D playersRigid;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 60;
 
-        dashTrigger = topPiece.GetComponent<DashEnemy>();
         canDash = true;
-
-        topRigid = topPiece.GetComponent<Rigidbody2D>();
-        bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Rigidbody2D topRigid = topPiece.GetComponent<Rigidbody2D>();
+        Rigidbody2D bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
+
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
             topRigid.AddTorque(rotationSpeed);
             bottomRigid.AddTorque(rotationSpeed);
         }
 
-        topRigid.AddForce((player.position - topPiece.transform.position) * speed / 100, ForceMode2D.Impulse);
+        //topRigid.AddForce((player.position - topPiece.transform.position) * speed, ForceMode2D.Impulse);
+        float posNumMathX = player.position.x - topPiece.transform.position.x;
+        float posNumMathY = player.position.y - topPiece.transform.position.y;
+        float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
+        topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed, (posNumMathY / posNumMathAbs) * speed));
+    }
 
-        if (dashTrigger.dash)
+    private void OnTriggerEnter(Collider playerDashCollider)
+    {
+        if (canDash)
         {
-            if (canDash)
-            {
-                canDash = false;
+            canDash = false;
 
-                topRigid.AddForce(-(player.position - topPiece.transform.position) * speed, ForceMode2D.Impulse);
-                speed = speed / 10;
-                rotationSpeed = rotationSpeed * 3;
 
-                Invoke(nameof(dash), dashChargeTime);
-                Debug.Log("Dash Charge");
-            }
+            Invoke(nameof(resetDash), dashCooldown);
         }
+
     }
 
     private void resetDash()
     {
         canDash = true;
     }
-
-    private void dash()
+    public int getDamage()
     {
-        speed = speed * 10;
-        rotationSpeed = rotationSpeed / 3;
-
-        Debug.Log("Dash Now!");
-        topRigid.AddForce((player.position - topPiece.transform.position) * 200, ForceMode2D.Impulse);
-
-        Invoke(nameof(resetDash), dashCooldown);
+        return damage;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log("Ehit");
+        if (collision.gameObject.tag == "Player Spike")
+        {
+            Debug.Log("Ehit");
+            health -= (playersRigid.angularVelocity) * playerScript.getDamage() /100;
+        }
     }
 }

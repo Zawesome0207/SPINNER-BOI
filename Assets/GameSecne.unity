@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 318717588}
   m_Layer: 0
   m_Name: bottom
-  m_TagString: Untagged
+  m_TagString: Player Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2740,7 +2740,7 @@ GameObject:
   - component: {fileID: 1544530334}
   m_Layer: 0
   m_Name: bottom
-  m_TagString: Untagged
+  m_TagString: Enemy Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3081,7 +3081,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1631212455}
-  - component: {fileID: 1631212454}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3089,29 +3088,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1631212454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631212453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff31b5e209031bc44a30c6274b4c9010, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  player: {fileID: 1899109446}
-  dashCooldown: 5
-  dashChargeTime: 1.5
-  playerDashCollider: {fileID: 1781717359}
-  spinner: {fileID: 1631212453}
-  topPiece: {fileID: 2011997107}
-  bottomPiece: {fileID: 1544530333}
-  speed: 1
-  rotationSpeed: 160
-  maxRotationVel: 2500
 --- !u!4 &1631212455
 Transform:
   m_ObjectHideFlags: 0
@@ -3234,8 +3210,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1781717357}
-  - component: {fileID: 1781717358}
-  - component: {fileID: 1781717359}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3252,67 +3226,13 @@ Transform:
   m_GameObject: {fileID: 1781717356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7.21, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1899109446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1781717358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781717356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f9ceaafb3c6f194e800ebdc25f87779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinner: {fileID: 1781717356}
-  topPiece: {fileID: 1899109444}
-  bottomPiece: {fileID: 318717584}
-  speed: 160
-  rotationSpeed: 160
-  maxRotationVel: 2500
---- !u!58 &1781717359
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781717356}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 4.01
 --- !u!1 &1805082288
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,9 +3281,10 @@ GameObject:
   - component: {fileID: 1899109447}
   - component: {fileID: 1899109448}
   - component: {fileID: 1899109449}
+  - component: {fileID: 1899109450}
   m_Layer: 0
-  m_Name: top
-  m_TagString: Untagged
+  m_Name: PlayerTop
+  m_TagString: Player Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3475,7 +3396,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.49
 --- !u!50 &1899109448
 Rigidbody2D:
   serializedVersion: 5
@@ -3522,6 +3443,28 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!114 &1899109450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899109444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9ceaafb3c6f194e800ebdc25f87779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinner: {fileID: 1781717356}
+  topPiece: {fileID: 1899109444}
+  bottomPiece: {fileID: 318717584}
+  speed: 160
+  rotationSpeed: 160
+  maxRotationVel: 1500
+  health: 100
+  currentBoss: {fileID: 2011997114}
+  enemysRigid: {fileID: 2011997110}
+  damage: 1
 --- !u!1 &1940706306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3938,8 +3881,9 @@ GameObject:
   - component: {fileID: 2011997110}
   - component: {fileID: 2011997109}
   - component: {fileID: 2011997113}
+  - component: {fileID: 2011997114}
   m_Layer: 0
-  m_Name: top
+  m_Name: EnemyTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4044,7 +3988,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.49
 --- !u!212 &2011997112
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4119,6 +4063,30 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!114 &2011997114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011997107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff31b5e209031bc44a30c6274b4c9010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  damage: 1
+  player: {fileID: 1899109446}
+  playerScript: {fileID: 1899109450}
+  playerDashCollider: {fileID: 0}
+  spinner: {fileID: 1631212453}
+  topPiece: {fileID: 2011997107}
+  bottomPiece: {fileID: 1544530333}
+  speed: 160
+  rotationSpeed: 160
+  maxRotationVel: 1500
+  playersRigid: {fileID: 1899109448}
 --- !u!1 &2100694805
 GameObject:
   m_ObjectHideFlags: 0
