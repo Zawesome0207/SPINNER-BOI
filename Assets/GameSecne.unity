@@ -4129,6 +4129,7 @@ GameObject:
   - component: {fileID: 2011997109}
   - component: {fileID: 2011997113}
   - component: {fileID: 2011997114}
+  - component: {fileID: 2011997115}
   m_Layer: 0
   m_Name: EnemyTop
   m_TagString: Untagged
@@ -4324,9 +4325,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   damage: 1
+  dashCooldown: 6
+  dashChargeTime: 3
   player: {fileID: 1899109446}
   playerScript: {fileID: 1899109450}
-  playerDashCollider: {fileID: 0}
   spinner: {fileID: 1631212453}
   topPiece: {fileID: 2011997107}
   bottomPiece: {fileID: 1544530333}
@@ -4334,6 +4336,42 @@ MonoBehaviour:
   rotationSpeed: 160
   maxRotationVel: 1500
   playersRigid: {fileID: 1899109448}
+--- !u!58 &2011997115
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011997107}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 5
 --- !u!1 &2100694805
 GameObject:
   m_ObjectHideFlags: 0
