@@ -7,10 +7,10 @@ public class Enemy : MonoBehaviour
     public Transform player;
     //public float moveSpeed;
 
+    private DashEnemy dashTrigger;
     private bool canDash;
     public float dashCooldown;
     public float dashChargeTime;
-    public CircleCollider2D playerDashCollider;
 
     public GameObject spinner;
     public GameObject topPiece;
@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
+        dashTrigger = topPiece.GetComponent<DashEnemy>();
         canDash = true;
 
         topRigid = topPiece.GetComponent<Rigidbody2D>();
@@ -42,21 +43,21 @@ public class Enemy : MonoBehaviour
             bottomRigid.AddTorque(rotationSpeed);
         }
 
-        topRigid.AddForce((player.position - topPiece.transform.position) * speed, ForceMode2D.Impulse);
-    }
+        topRigid.AddForce((player.position - topPiece.transform.position) * speed / 100, ForceMode2D.Impulse);
 
-    private void OnTriggerEnter(Collider playerDashCollider)
-    {
-        Debug.Log("trigger");
-
-        if (canDash)
+        if (dashTrigger.dash)
         {
-            canDash = false;
+            if (canDash)
+            {
+                canDash = false;
 
-            speed = speed / 3;
+                topRigid.AddForce(-(player.position - topPiece.transform.position) * speed, ForceMode2D.Impulse);
+                speed = speed / 10;
+                rotationSpeed = rotationSpeed * 3;
 
-            Invoke(nameof(dash), dashChargeTime);
-            Invoke(nameof(resetDash), dashCooldown);
+                Invoke(nameof(dash), dashChargeTime);
+                Debug.Log("Dash Charge");
+            }
         }
     }
 
@@ -67,8 +68,12 @@ public class Enemy : MonoBehaviour
 
     private void dash()
     {
-        speed = speed * 3;
+        speed = speed * 10;
+        rotationSpeed = rotationSpeed / 3;
 
-        topRigid.AddForce((player.position - topPiece.transform.position) * 1000, ForceMode2D.Impulse);
+        Debug.Log("Dash Now!");
+        topRigid.AddForce((player.position - topPiece.transform.position) * 200, ForceMode2D.Impulse);
+
+        Invoke(nameof(resetDash), dashCooldown);
     }
 }
