@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
 
+    public ParticleSystem dashReadyParticles;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,6 +56,8 @@ public class Enemy : MonoBehaviour
     private void resetDash()
     {
         canDash = true;
+
+        dashReadyParticles.gameObject.SetActive(true);
     }
 
     private void dash()
@@ -84,7 +88,7 @@ public class Enemy : MonoBehaviour
         {
             canDash = false;
 
-            topRigid.AddForce(-(player.position - topPiece.transform.position).normalized * speed / 100, ForceMode2D.Impulse);
+            dashReadyParticles.gameObject.SetActive(false);
 
             dash();
         }
