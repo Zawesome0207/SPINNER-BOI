@@ -3460,9 +3460,10 @@ MonoBehaviour:
   bottomPiece: {fileID: 318717584}
   speed: 160
   rotationSpeed: 160
-  maxRotationVel: 2500
+  maxRotationVel: 1500
   health: 100
-  currentBoss: {fileID: 0}
+  currentBoss: {fileID: 2011997114}
+  enemysRigid: {fileID: 2011997110}
   damage: 1
 --- !u!1 &1940706306
 GameObject:
@@ -4077,14 +4078,15 @@ MonoBehaviour:
   health: 100
   damage: 1
   player: {fileID: 1899109446}
-  playerScript: {fileID: 0}
+  playerScript: {fileID: 1899109450}
   playerDashCollider: {fileID: 0}
   spinner: {fileID: 1631212453}
   topPiece: {fileID: 2011997107}
   bottomPiece: {fileID: 1544530333}
   speed: 160
   rotationSpeed: 160
-  maxRotationVel: 2500
+  maxRotationVel: 1500
+  playersRigid: {fileID: 1899109448}
 --- !u!1 &2100694805
 GameObject:
   m_ObjectHideFlags: 0
