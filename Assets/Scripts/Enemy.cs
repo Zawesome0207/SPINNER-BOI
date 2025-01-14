@@ -5,12 +5,12 @@ public class Enemy : MonoBehaviour
     public float health;
     public int damage;
 
-    public Transform player;
-    //public float moveSpeed;
-    public Player playerScript;
     private bool canDash;
-    private float dashCooldown;
-    public CircleCollider2D playerDashCollider;
+    public float dashCooldown;
+    public float dashChargeTime;
+
+    public Transform player;
+    public Player playerScript;
 
     public GameObject spinner;
     public GameObject topPiece;
@@ -20,19 +20,23 @@ public class Enemy : MonoBehaviour
     public int maxRotationVel;
     public Rigidbody2D playersRigid;
 
+    private Rigidbody2D topRigid;
+    private Rigidbody2D bottomRigid;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 60;
 
         canDash = true;
+
+        topRigid = topPiece.GetComponent<Rigidbody2D>();
+        bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D topRigid = topPiece.GetComponent<Rigidbody2D>();
-        Rigidbody2D bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
 
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
@@ -47,21 +51,19 @@ public class Enemy : MonoBehaviour
         topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed, (posNumMathY / posNumMathAbs) * speed));
     }
 
-    private void OnTriggerEnter(Collider playerDashCollider)
-    {
-        if (canDash)
-        {
-            canDash = false;
-
-
-            Invoke(nameof(resetDash), dashCooldown);
-        }
-
-    }
-
     private void resetDash()
     {
         canDash = true;
+    }
+
+    private void dash()
+    {
+        bottomRigid.angularVelocity = maxRotationVel;
+
+        Debug.Log("Dash Now!");
+        topRigid.AddForce((player.position - topPiece.transform.position) * 200, ForceMode2D.Impulse);
+
+        Invoke(nameof(resetDash), dashCooldown);
     }
     public int getDamage()
     {
@@ -74,6 +76,17 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Ehit");
             health -= (playersRigid.angularVelocity) * playerScript.getDamage() /100;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player Spike" && canDash)
+        {
+            canDash = false;
+
+            topRigid.AddForce(-(player.position - topPiece.transform.position).normalized * speed / 100, ForceMode2D.Impulse);
+
+            dash();
         }
     }
 }
