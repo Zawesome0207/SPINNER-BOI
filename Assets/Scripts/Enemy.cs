@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     public int damage;
 
     private bool canDash;
-    public float dashCooldown;
+    public int dashCooldown;
     public float dashChargeTime;
 
     public Transform player;
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
             topRigid.AddTorque(rotationSpeed);
