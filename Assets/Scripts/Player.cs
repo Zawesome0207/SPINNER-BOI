@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class Player : MonoBehaviour
     public int damage;
     public float dashCooldown;
     public Camera cameras;
-    
+    public Slider healthBar;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         //Application.targetFrameRate = 60;
         Rigidbody2D topRigid = topPiece.GetComponent<Rigidbody2D>();
         Rigidbody2D bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
+        healthBar.value = health;
 
 
         if (Input.GetKey("w"))
