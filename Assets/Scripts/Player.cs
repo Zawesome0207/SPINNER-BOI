@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
             float posNumMathX = mousePos.x - topPiece.transform.position.x;
             float posNumMathY = mousePos.y - topPiece.transform.position.y;
             float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
-            topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed*100, (posNumMathY / posNumMathAbs) * speed*100));
+            topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed*500, (posNumMathY / posNumMathAbs) * speed*500));
 
         }
 
