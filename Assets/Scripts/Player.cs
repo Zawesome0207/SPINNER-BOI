@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     public Enemy currentBoss;
     public Rigidbody2D enemysRigid;
     public int damage;
-    
+    public float dashCooldown;
+    public Camera cameras;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,6 +56,25 @@ public class Player : MonoBehaviour
             
         }
 
+        if (dashCooldown > 0)
+        {
+            dashCooldown--;
+        }
+        if (dashCooldown == 0 && Input.GetMouseButtonDown(0))
+        {
+            
+            dashCooldown = 3*60;
+            Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+            Debug.Log("mouseX:" + mousePos.x + "   mouseY: " + mousePos.y);
+            Debug.Log("playerX:" + topPiece.transform.position.x + "   playerY: " + topPiece.transform.position.y);
+            //topRigid.AddForce(Vector2.MoveTowards(topRigid.position, mousePos,1000)*new Vector2(200,200));
+
+            float posNumMathX = mousePos.x - topPiece.transform.position.x;
+            float posNumMathY = mousePos.y - topPiece.transform.position.y;
+            float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
+            topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed*100, (posNumMathY / posNumMathAbs) * speed*100));
+
+        }
 
     }
     //private void OnCollisonEnter2D(Collider2D collision)
