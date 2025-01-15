@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,12 +13,18 @@ public class Player : MonoBehaviour
     public Enemy currentBoss;
     public Rigidbody2D enemysRigid;
     public int damage;
-    
+
+    private bool canDash;
+    public ParticleSystem dashReadyParticles;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 60;
-        
+
+        canDash = true;
+        dashReadyParticles.gameObject.SetActive(true);
+
     }
 
     // Update is called once per frame
@@ -54,8 +61,27 @@ public class Player : MonoBehaviour
             
         }
 
+        if(Input.GetKeyDown(KeyCode.Space) && canDash)
+        {
+            bottomRigid.angularVelocity = maxRotationVel;
+
+            topRigid.AddForce(topRigid.totalForce *  10, ForceMode2D.Impulse);
+
+            dashReadyParticles.gameObject.SetActive(false);
+
+            canDash = false;
+            Invoke(nameof(resetDash), 6);
+        }
+
 
     }
+
+    private void resetDash()
+    {
+        canDash = true;
+        dashReadyParticles.gameObject.SetActive(true);
+    }
+
     //private void OnCollisonEnter2D(Collider2D collision)
     //{
     //if(collision.gameObject.tag== "Enemy Spike")
@@ -69,7 +95,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Enemy Spike")
         {
             Debug.Log("hit");
-            health -= (enemysRigid.angularVelocity) * currentBoss.getDamage()/100;
+            health -= Mathf.Abs(((enemysRigid.angularVelocity) * currentBoss.getDamage() / 100) * ((enemysRigid.linearVelocity.x + enemysRigid.linearVelocity.y) / 20));
         }
             
             

@@ -51,6 +51,11 @@ public class Enemy : MonoBehaviour
         float posNumMathY = player.position.y - topPiece.transform.position.y;
         float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
         topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed, (posNumMathY / posNumMathAbs) * speed));
+
+        if(health <= 0)
+        {
+            death();
+        }
     }
 
     private void resetDash()
@@ -79,7 +84,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player Spike")
         {
             Debug.Log("Ehit");
-            health -= (playersRigid.angularVelocity) * playerScript.getDamage() /100;
+            health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /100) * ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/20));
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,5 +97,10 @@ public class Enemy : MonoBehaviour
 
             dash();
         }
+    }
+
+    private void death()
+    {
+        
     }
 }
