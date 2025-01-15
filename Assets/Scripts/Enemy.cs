@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D bottomRigid;
 
     public ParticleSystem dashReadyParticles;
+    public ParticleSystem deathParticles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +34,8 @@ public class Enemy : MonoBehaviour
 
         topRigid = topPiece.GetComponent<Rigidbody2D>();
         bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
+
+        deathParticles.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,6 +53,13 @@ public class Enemy : MonoBehaviour
         float posNumMathY = player.position.y - topPiece.transform.position.y;
         float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
         topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed, (posNumMathY / posNumMathAbs) * speed));
+
+        if(health <= 0.0)
+        {
+            death();
+        }
+
+        deathParticles.transform.position = topPiece.transform.position;
 
     }
 
@@ -96,6 +106,8 @@ public class Enemy : MonoBehaviour
 
     private void death()
     {
-        
+        deathParticles.gameObject.SetActive(true);
+
+        Destroy(GameObject.Find("EnemyTop"));
     }
 }
