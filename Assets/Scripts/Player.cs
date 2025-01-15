@@ -13,14 +13,13 @@ public class Player : MonoBehaviour
     public Enemy currentBoss;
     public Rigidbody2D enemysRigid;
     public int damage;
+    public float dashCooldown;
+    public Camera cameras;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 60;
-
-        canDash = true;
-        dashReadyParticles.gameObject.SetActive(true);
 
     }
 
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("w"))
         {
-            topRigid.AddForce(new Vector2(0,speed));
+            topRigid.AddForce(new Vector2(0, speed));
         }
         if (Input.GetKey("a"))
         {
@@ -48,26 +47,14 @@ public class Player : MonoBehaviour
         {
             topRigid.AddForce(new Vector2(speed, 0));
         }
-        if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
+        if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))
         {
-            if(bottomRigid.angularVelocity< maxRotationVel)
+            if (bottomRigid.angularVelocity < maxRotationVel)
             {
                 topRigid.AddTorque(rotationSpeed);
                 bottomRigid.AddTorque(rotationSpeed);
             }
-            
-        }
 
-        if(Input.GetKeyDown(KeyCode.Space) && canDash)
-        {
-            bottomRigid.angularVelocity = maxRotationVel;
-
-            topRigid.AddForce(topRigid.totalForce *  10, ForceMode2D.Impulse);
-
-            dashReadyParticles.gameObject.SetActive(false);
-
-            canDash = false;
-            Invoke(nameof(resetDash), 6);
         }
 
         if (dashCooldown > 0)
@@ -76,8 +63,8 @@ public class Player : MonoBehaviour
         }
         if (dashCooldown == 0 && Input.GetMouseButtonDown(0))
         {
-            
-            dashCooldown = 3*60;
+
+            dashCooldown = 3 * 60;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
             Debug.Log("mouseX:" + mousePos.x + "   mouseY: " + mousePos.y);
             Debug.Log("playerX:" + topPiece.transform.position.x + "   playerY: " + topPiece.transform.position.y);
@@ -86,15 +73,11 @@ public class Player : MonoBehaviour
             float posNumMathX = mousePos.x - topPiece.transform.position.x;
             float posNumMathY = mousePos.y - topPiece.transform.position.y;
             float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
-            topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed*500, (posNumMathY / posNumMathAbs) * speed*500));
+            topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed * 500, (posNumMathY / posNumMathAbs) * speed * 500));
 
         }
-
-    private void resetDash()
-    {
-        canDash = true;
-        dashReadyParticles.gameObject.SetActive(true);
     }
+
 
     //private void OnCollisonEnter2D(Collider2D collision)
     //{

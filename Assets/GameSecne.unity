@@ -8166,7 +8166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1631212455
 Transform:
   m_ObjectHideFlags: 0
@@ -8545,7 +8545,7 @@ MonoBehaviour:
   currentBoss: {fileID: 2011997114}
   enemysRigid: {fileID: 2011997110}
   damage: 1
-  dashCooldown: 0
+  dashCooldown: 6
   cameras: {fileID: 2100694807}
 --- !u!1 &1940706306
 GameObject:
@@ -9161,8 +9161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   damage: 1
-  dashCooldown: 0
-  dashChargeTime: 3
+  dashCooldown: 6
   player: {fileID: 1899109446}
   playerScript: {fileID: 1899109450}
   spinner: {fileID: 1631212453}

@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
 
     private bool canDash;
     public int dashCooldown;
-    public float dashChargeTime;
 
     public Transform player;
     public Player playerScript;
@@ -52,10 +51,6 @@ public class Enemy : MonoBehaviour
         float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
         topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed, (posNumMathY / posNumMathAbs) * speed));
 
-        if(health <= 0)
-        {
-            death();
-        }
     }
 
     private void resetDash()
