@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     public float health;
-    public int damage;
+    public float damage;
 
     private bool canDash;
     public int dashCooldown;
@@ -90,7 +91,7 @@ public class Enemy : MonoBehaviour
 
         Invoke(nameof(resetDash), dashCooldown);
     }
-    public int getDamage()
+    public float getDamage()
     {
         return damage;
     }
@@ -100,9 +101,9 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player Spike" && !isImmune)
         {
             Debug.Log("Ehit");
-            health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /500) + ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/2));
+            health -= Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() /500) + (Mathf.Abs(topRigid.linearVelocityX - playersRigid.linearVelocity.x) + (Mathf.Abs(topRigid.linearVelocityY - playersRigid.linearVelocity.y))/5);
 
-            topRigid.linearVelocity += playersRigid.linearVelocity;
+            topRigid.linearVelocity += playersRigid.linearVelocity * 10;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
