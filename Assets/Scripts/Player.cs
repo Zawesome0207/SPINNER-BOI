@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public Camera cameras;
     public Slider healthBar;
 
+    public ParticleSystem dashReadyParticles;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -64,6 +66,11 @@ public class Player : MonoBehaviour
         {
             dashCooldown--;
         }
+
+        if(dashCooldown == 0)
+        {
+            dashReadyParticles.gameObject.SetActive(true);
+        }
         if (dashCooldown == 0 && Input.GetMouseButtonDown(0))
         {
 
@@ -78,6 +85,7 @@ public class Player : MonoBehaviour
             float posNumMathAbs = Mathf.Abs(posNumMathX) + Mathf.Abs(posNumMathY);
             topRigid.AddForce(new Vector2((posNumMathX / posNumMathAbs) * speed * 500, (posNumMathY / posNumMathAbs) * speed * 500));
 
+            dashReadyParticles.gameObject.SetActive(false);
         }
     }
 
