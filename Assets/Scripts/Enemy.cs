@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
     public ParticleSystem deathParticles;
     public Slider healthBar;
 
+    private bool isImmune;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour
         bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
 
         deathParticles.gameObject.SetActive(false);
+
+        isImmune = false;
     }
 
     // Update is called once per frame
@@ -75,6 +79,10 @@ public class Enemy : MonoBehaviour
 
     private void dash()
     {
+        isImmune = true;
+
+        Invoke(nameof(stopImmune), 1);
+
         bottomRigid.angularVelocity = maxRotationVel;
 
         Debug.Log("Dash Now!");
@@ -89,7 +97,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Ehit");
-        if (collision.gameObject.tag == "Player Spike")
+        if (collision.gameObject.tag == "Player Spike" && !isImmune)
         {
             Debug.Log("Ehit");
             health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /100) + ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/20));
@@ -112,5 +120,10 @@ public class Enemy : MonoBehaviour
         deathParticles.gameObject.SetActive(true);
 
         Destroy(GameObject.Find("EnemyTop"));
+    }
+
+    private void stopImmune()
+    {
+        isImmune = false;
     }
 }
