@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
+    public Slider healthBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,7 +43,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        healthBar.value = health;
+
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
             topRigid.AddTorque(rotationSpeed);
@@ -89,7 +92,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player Spike")
         {
             Debug.Log("Ehit");
-            health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /100) * ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/20));
+            health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /100) + ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/20));
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
