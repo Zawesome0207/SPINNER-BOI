@@ -13,12 +13,13 @@ public class Player : MonoBehaviour
     public float health;
     public Enemy currentBoss;
     public Rigidbody2D enemysRigid;
-    public int damage;
+    public float damage;
     public float dashCooldown;
     public Camera cameras;
     public Slider healthBar;
 
     public ParticleSystem dashReadyParticles;
+    public ParticleSystem deathParticles;
     private bool isImmune;
 
     private Rigidbody2D topRigid;
@@ -34,12 +35,15 @@ public class Player : MonoBehaviour
         topRigid = topPiece.GetComponent<Rigidbody2D>();
         bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
 
+        deathParticles.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         healthBar.value = health;
+
+        deathParticles.transform.position = topPiece.transform.position;
 
 
         if (Input.GetKey("w"))
@@ -96,6 +100,11 @@ public class Player : MonoBehaviour
 
             dashReadyParticles.gameObject.SetActive(false);
         }
+
+        if(health <= 0)
+        {
+            death();
+        }
     }
 
 
@@ -112,14 +121,14 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Enemy Spike" && !isImmune)
         {
             Debug.Log("hit");
-            health -= Mathf.Abs(((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((enemysRigid.linearVelocity.x + enemysRigid.linearVelocity.y) / 2));
+            health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - enemysRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - enemysRigid.linearVelocity.y)) / 5);
 
-            topRigid.linearVelocity += enemysRigid.linearVelocity;
+            topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
         }
             
             
     }
-    public int getDamage()
+    public float getDamage()
     {
         return damage;
     }
@@ -127,5 +136,12 @@ public class Player : MonoBehaviour
     private void stopImmune()
     {
         isImmune = false;
+    }
+
+    private void death()
+    {
+        deathParticles.gameObject.SetActive(true);
+
+        Destroy(GameObject.Find("PlayerTop"));
     }
 }
