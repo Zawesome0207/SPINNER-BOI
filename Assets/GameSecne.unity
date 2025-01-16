@@ -19689,6 +19689,7 @@ MonoBehaviour:
   playersRigid: {fileID: 1899109448}
   dashReadyParticles: {fileID: 518046612}
   deathParticles: {fileID: 1717680613}
+  healthBar: {fileID: 584245853}
 --- !u!58 &2011997115
 CircleCollider2D:
   m_ObjectHideFlags: 0

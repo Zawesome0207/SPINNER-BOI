@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Enemy Spike" && !isImmune)
         {
             Debug.Log("hit");
-            health -= Mathf.Abs(((enemysRigid.angularVelocity) * currentBoss.getDamage() / 100) * ((enemysRigid.linearVelocity.x + enemysRigid.linearVelocity.y) / 20));
+            health -= Mathf.Abs(((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((enemysRigid.linearVelocity.x + enemysRigid.linearVelocity.y) / 2));
         }
             
             

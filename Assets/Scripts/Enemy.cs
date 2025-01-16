@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player Spike" && !isImmune)
         {
             Debug.Log("Ehit");
-            health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /100) + ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/20));
+            health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /500) + ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/2));
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
