@@ -101,6 +101,8 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Ehit");
             health -= Mathf.Abs(((playersRigid.angularVelocity) * playerScript.getDamage() /500) + ((playersRigid.linearVelocity.x + playersRigid.linearVelocity.y)/2));
+
+            topRigid.linearVelocity += playersRigid.linearVelocity;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

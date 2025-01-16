@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     public ParticleSystem dashReadyParticles;
     private bool isImmune;
 
+    private Rigidbody2D topRigid;
+    private Rigidbody2D bottomRigid;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,14 +31,14 @@ public class Player : MonoBehaviour
 
         isImmune = false;
 
+        topRigid = topPiece.GetComponent<Rigidbody2D>();
+        bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Application.targetFrameRate = 60;
-        Rigidbody2D topRigid = topPiece.GetComponent<Rigidbody2D>();
-        Rigidbody2D bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
         healthBar.value = health;
 
 
@@ -110,6 +113,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("hit");
             health -= Mathf.Abs(((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((enemysRigid.linearVelocity.x + enemysRigid.linearVelocity.y) / 2));
+
+            topRigid.linearVelocity += enemysRigid.linearVelocity;
         }
             
             
