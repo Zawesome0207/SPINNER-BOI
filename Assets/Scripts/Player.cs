@@ -19,11 +19,14 @@ public class Player : MonoBehaviour
     public Slider healthBar;
 
     public ParticleSystem dashReadyParticles;
+    private bool isImmune;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 60;
+
+        isImmune = false;
 
     }
 
@@ -73,6 +76,9 @@ public class Player : MonoBehaviour
         }
         if (dashCooldown == 0 && Input.GetMouseButtonDown(0))
         {
+            isImmune = true;
+
+            Invoke(nameof(stopImmune), 1);
 
             dashCooldown = 3 * 60;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
@@ -100,7 +106,7 @@ public class Player : MonoBehaviour
     // }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy Spike")
+        if (collision.gameObject.tag == "Enemy Spike" && !isImmune)
         {
             Debug.Log("hit");
             health -= Mathf.Abs(((enemysRigid.angularVelocity) * currentBoss.getDamage() / 100) * ((enemysRigid.linearVelocity.x + enemysRigid.linearVelocity.y) / 20));
@@ -111,5 +117,10 @@ public class Player : MonoBehaviour
     public int getDamage()
     {
         return damage;
+    }
+
+    private void stopImmune()
+    {
+        isImmune = false;
     }
 }
