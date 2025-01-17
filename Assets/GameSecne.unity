@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 43962615}
   - component: {fileID: 43962614}
   - component: {fileID: 43962613}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 248779500}
   - component: {fileID: 248779502}
   - component: {fileID: 248779501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DashReady (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5545,7 +5545,7 @@ GameObject:
   - component: {fileID: 318717587}
   - component: {fileID: 318717586}
   - component: {fileID: 318717588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bottom
   m_TagString: Player Spike
   m_Icon: {fileID: 0}
@@ -5792,7 +5792,7 @@ GameObject:
   - component: {fileID: 518046610}
   - component: {fileID: 518046612}
   - component: {fileID: 518046611}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DashReady
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10716,7 +10716,7 @@ GameObject:
   - component: {fileID: 595378816}
   - component: {fileID: 595378815}
   - component: {fileID: 595378814}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10798,7 +10798,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595378812}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -10904,7 +10904,7 @@ GameObject:
   - component: {fileID: 663786979}
   - component: {fileID: 663786978}
   - component: {fileID: 663786977}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10986,7 +10986,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663786975}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -11301,9 +11301,9 @@ GameObject:
   - component: {fileID: 728740939}
   - component: {fileID: 728740938}
   - component: {fileID: 728740937}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (5)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11383,7 +11383,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728740935}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -11489,9 +11489,9 @@ GameObject:
   - component: {fileID: 746657612}
   - component: {fileID: 746657611}
   - component: {fileID: 746657610}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (4)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11571,7 +11571,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746657608}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -11864,7 +11864,7 @@ GameObject:
   - component: {fileID: 831130141}
   - component: {fileID: 831130143}
   - component: {fileID: 831130142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11999,7 +11999,7 @@ GameObject:
   - component: {fileID: 843511977}
   - component: {fileID: 843511976}
   - component: {fileID: 843511975}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12081,7 +12081,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843511973}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -12416,7 +12416,7 @@ GameObject:
   - component: {fileID: 947356664}
   - component: {fileID: 947356666}
   - component: {fileID: 947356665}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12585,9 +12585,9 @@ GameObject:
   - component: {fileID: 1002300547}
   - component: {fileID: 1002300546}
   - component: {fileID: 1002300545}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (3)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12667,7 +12667,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002300543}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -12907,7 +12907,7 @@ GameObject:
   - component: {fileID: 1177268703}
   - component: {fileID: 1177268702}
   - component: {fileID: 1177268701}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12989,7 +12989,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177268699}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -13095,7 +13095,7 @@ GameObject:
   - component: {fileID: 1234857583}
   - component: {fileID: 1234857582}
   - component: {fileID: 1234857581}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13613,9 +13613,9 @@ GameObject:
   - component: {fileID: 1544530336}
   - component: {fileID: 1544530335}
   - component: {fileID: 1544530334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bottom
-  m_TagString: Enemy Spike
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13771,9 +13771,9 @@ GameObject:
   - component: {fileID: 1581213768}
   - component: {fileID: 1581213769}
   - component: {fileID: 1581213770}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13855,7 +13855,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581213766}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -13956,13 +13956,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1631212455}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1631212455
 Transform:
   m_ObjectHideFlags: 0
@@ -14388,7 +14388,7 @@ GameObject:
   - component: {fileID: 1717680611}
   - component: {fileID: 1717680613}
   - component: {fileID: 1717680612}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyDeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19219,7 +19219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1781717357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19403,7 +19403,7 @@ GameObject:
   - component: {fileID: 1899109448}
   - component: {fileID: 1899109449}
   - component: {fileID: 1899109450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerTop
   m_TagString: Player Spike
   m_Icon: {fileID: 0}
@@ -19738,7 +19738,7 @@ GameObject:
   - component: {fileID: 1942626809}
   - component: {fileID: 1942626811}
   - component: {fileID: 1942626810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19872,7 +19872,7 @@ GameObject:
   - component: {fileID: 1968929083}
   - component: {fileID: 1968929084}
   - component: {fileID: 1968929085}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20011,7 +20011,7 @@ GameObject:
   - component: {fileID: 2011997113}
   - component: {fileID: 2011997114}
   - component: {fileID: 2011997115}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
