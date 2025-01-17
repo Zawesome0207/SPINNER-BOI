@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public float damage;
     public float dashCooldown;
     public Camera cameras;
-    public Slider healthBar;
+    public Image healthBar;
 
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
@@ -24,6 +24,12 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
+
+    public int dodgeCooldown;
+
+
+    float dodgex;
+    float dodgey;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,7 +47,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = health;
+        healthBar.fillAmount = health/100;
 
         deathParticles.transform.position = topPiece.transform.position;
 
@@ -76,6 +82,10 @@ public class Player : MonoBehaviour
         {
             dashCooldown--;
         }
+        if(dodgeCooldown> 0)
+        {
+            dodgeCooldown--;
+        }
 
         if(dashCooldown == 0)
         {
@@ -85,12 +95,12 @@ public class Player : MonoBehaviour
         {
             isImmune = true;
 
-            Invoke(nameof(stopImmune), 1);
+            Invoke(nameof(stopImmune), .2f);
 
             dashCooldown = 3 * 60;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-            Debug.Log("mouseX:" + mousePos.x + "   mouseY: " + mousePos.y);
-            Debug.Log("playerX:" + topPiece.transform.position.x + "   playerY: " + topPiece.transform.position.y);
+            //Debug.Log("mouseX:" + mousePos.x + "   mouseY: " + mousePos.y);
+            //Debug.Log("playerX:" + topPiece.transform.position.x + "   playerY: " + topPiece.transform.position.y);
             //topRigid.AddForce(Vector2.MoveTowards(topRigid.position, mousePos,1000)*new Vector2(200,200));
 
             float posNumMathX = mousePos.x - topPiece.transform.position.x;
@@ -100,8 +110,26 @@ public class Player : MonoBehaviour
 
             dashReadyParticles.gameObject.SetActive(false);
         }
+        if (dodgeCooldown == 0 && Input.GetMouseButtonDown(1))
+        {
+            dodgeCooldown = 3 * 60;
 
-        if(health <= 0)
+            Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+            dodgex=  mousePos.x - topPiece.transform.position.x;
+            dodgey = mousePos.y - topPiece.transform.position.y;
+            float posNumMathAbs = Mathf.Abs(dodgex) + Mathf.Abs(dodgey);
+
+            dodgex = dodgex / posNumMathAbs;
+            dodgey = dodgey / posNumMathAbs;
+        }
+        if(dodgeCooldown>(2.4*60))
+        {
+            //Debug.Log(1);
+            topRigid.linearVelocity = new Vector2(dodgex * speed * .07f, dodgey * speed * .07f);
+            bottomRigid.linearVelocity = new Vector2(dodgex * speed * .07f, dodgey * speed * .07f);
+        }
+
+        if (health <= 0)
         {
             death();
         }
@@ -120,10 +148,31 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy Spike" && !isImmune)
         {
-            Debug.Log("hit");
-            health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - enemysRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - enemysRigid.linearVelocity.y)) / 5);
+            //Debug.Log("hit");
+            //health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - PlayersRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - PlayersRigid.linearVelocity.y)) / 5);
 
-            topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
+
+            float PlayerVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
+            float PlayerRotationDamage = Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 50);
+
+            if (PlayerVelocityDamge > 20)
+            {
+                PlayerVelocityDamge = 20;
+            }
+            if (PlayerRotationDamage > 20)
+            {
+                PlayerRotationDamage = 20;
+            }
+
+            Debug.Log("Player rotation damage: " + PlayerRotationDamage + "  Player velocity Damage: " + PlayerVelocityDamge);//debug
+
+            health -= (PlayerVelocityDamge + PlayerRotationDamage) / 2;
+
+            //topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
+
+            //topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
+
+            
         }
             
             
@@ -142,6 +191,7 @@ public class Player : MonoBehaviour
     {
         deathParticles.gameObject.SetActive(true);
 
-        Destroy(GameObject.Find("PlayerTop"));
+        //Destroy(GameObject.Find("PlayerTop"));
+        spinner.SetActive(false);
     }
 }
