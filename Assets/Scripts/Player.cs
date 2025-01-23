@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     public Enemy currentBoss;
     public Rigidbody2D enemysRigid;
     public float damage;
-    public float dashCooldown;
     public Camera cameras;
     public Image healthBar;
 
@@ -25,13 +24,13 @@ public class Player : MonoBehaviour
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
 
-    public int dodgeCooldown;
-
-
     float dodgex;
     float dodgey;
 
+    [Header("Debug - Runtime Filled")]
     public bool isImmune;
+    public int dodgeCooldown;
+    public float dashCooldown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -114,7 +113,7 @@ public class Player : MonoBehaviour
         }
         if (dodgeCooldown == 0 && Input.GetMouseButtonDown(1))
         {
-            dodgeCooldown = 3 * 60;
+            dodgeCooldown = 2 * 60;
 
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
             dodgex=  mousePos.x - topPiece.transform.position.x;

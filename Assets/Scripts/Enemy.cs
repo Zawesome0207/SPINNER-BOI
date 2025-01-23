@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     public ParticleSystem deathParticles;
     public Image healthBar;
 
+    [Header("Debug - Runtime Filled")]
     private bool isImmune;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -98,7 +99,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Ehit");
-        if (collision.gameObject.tag == "Player Spike" && !isImmune)
+        if ((collision.gameObject.tag == "Player Spike" || collision.gameObject.tag == "Player") && !isImmune)
         {
             float EnemyVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
             float EnemyRotationDamage = Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
