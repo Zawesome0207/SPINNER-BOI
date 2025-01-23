@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player Spike
   - Enemy Spike
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,11 +16,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Dodging
+  - Player Weapon
+  - Enemy Weapon
   - 
   - 
   - 
@@ -42,6 +43,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 
+    uniqueID: 3944482817
+    locked: 0
+  - name: 
+    uniqueID: 1979920657
+    locked: 0
+  - name: 
+    uniqueID: 3795479893
     locked: 0
   m_RenderingLayers:
   - Default

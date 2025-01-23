@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
-    public Slider healthBar;
+    public Image healthBar;
 
     private bool isImmune;
 
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = health;
+        healthBar.fillAmount = health / 100;
 
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
@@ -82,11 +82,11 @@ public class Enemy : MonoBehaviour
     {
         isImmune = true;
 
-        Invoke(nameof(stopImmune), 1);
+        Invoke(nameof(stopImmune), .2f);
 
         bottomRigid.angularVelocity = maxRotationVel;
 
-        Debug.Log("Dash Now!");
+        //Debug.Log("Dash Now!");
         topRigid.AddForce((player.position - topPiece.transform.position) * 200, ForceMode2D.Impulse);
 
         Invoke(nameof(resetDash), dashCooldown);
@@ -100,10 +100,25 @@ public class Enemy : MonoBehaviour
         //Debug.Log("Ehit");
         if (collision.gameObject.tag == "Player Spike" && !isImmune)
         {
-            Debug.Log("Ehit");
-            health -= Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() /500) + (Mathf.Abs(topRigid.linearVelocityX - playersRigid.linearVelocity.x) + (Mathf.Abs(topRigid.linearVelocityY - playersRigid.linearVelocity.y))/5);
+            float EnemyVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
+            float EnemyRotationDamage = Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
+            if(EnemyVelocityDamge>20)
+            {
+                EnemyVelocityDamge = 20;
+            }
+            if (EnemyRotationDamage > 20)
+            {
+                EnemyRotationDamage = 20;
+            }
 
-            topRigid.linearVelocity += playersRigid.linearVelocity * 10;
+            //float damn 
+            Debug.Log("Enemy rotation damage: "+ EnemyRotationDamage + "  Enemy velocity Damage: "+ EnemyVelocityDamge);//debug
+
+            health -= (EnemyVelocityDamge+ EnemyRotationDamage)/2;
+
+            //topRigid.linearVelocity += playersRigid.linearVelocity * 10;
+
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
