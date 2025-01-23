@@ -23886,7 +23886,7 @@ MonoBehaviour:
   spinner: {fileID: 1781717356}
   topPiece: {fileID: 1899109444}
   bottomPiece: {fileID: 318717584}
-  speed: 250
+  speed: 220
   rotationSpeed: 160
   maxRotationVel: 1500
   health: 100
@@ -24518,7 +24518,7 @@ MonoBehaviour:
   spinner: {fileID: 1631212453}
   topPiece: {fileID: 2011997107}
   bottomPiece: {fileID: 1544530333}
-  speed: 250
+  speed: 220
   rotationSpeed: 160
   maxRotationVel: 1500
   playersRigid: {fileID: 1899109448}
