@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player Spike" && canDash)
+        if ((collision.gameObject.tag == "Player Spike" || collision.gameObject.tag == "Player") && canDash)
         {
             canDash = false;
 

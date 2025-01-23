@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
 
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
-    private bool isImmune;
 
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
 
     float dodgex;
     float dodgey;
+
+    public bool isImmune;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -146,7 +148,7 @@ public class Player : MonoBehaviour
     // }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy Spike" && !isImmune)
+        if ((collision.gameObject.tag == "Enemy Spike" || collision.gameObject.tag == "Enemy") && !isImmune)
         {
             //Debug.Log("hit");
             //health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - PlayersRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - PlayersRigid.linearVelocity.y)) / 5);
