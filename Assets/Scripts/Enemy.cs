@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
             }
 
             //float damn 
-            Debug.Log("Enemy rotation damage: "+ EnemyRotationDamage + "  Enemy velocity Damage: "+ EnemyVelocityDamge);//debug
+            Debug.Log("Enemy rotation damage: "+ EnemyRotationDamage/2 + "  Enemy velocity Damage: "+ EnemyVelocityDamge/2);//debug
 
             health -= (EnemyVelocityDamge+ EnemyRotationDamage)/2;
 
