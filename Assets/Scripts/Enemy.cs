@@ -106,20 +106,21 @@ public class Enemy : MonoBehaviour
         //Debug.Log("Ehit");
         if ((collision.gameObject.tag == "Player Spike" || collision.gameObject.tag == "Player") && !isImmune)
         {
+            float pain = playerScript.getDamage();
 
             isImmune = true;
 
             Invoke(nameof(stopImmune), .5f);
 
-            float EnemyVelocityDamge = damage* Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
-            float EnemyRotationDamage = damage*Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
-            if(EnemyVelocityDamge>20*damage)
+            float EnemyVelocityDamge = pain * Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
+            float EnemyRotationDamage = pain * Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
+            if(EnemyVelocityDamge>20* pain)
             {
-                EnemyVelocityDamge = 20*   damage;
+                EnemyVelocityDamge = 20* pain;
             }
-            if (EnemyRotationDamage > 20*damage)
+            if (EnemyRotationDamage > 20* pain)
             {
-                EnemyRotationDamage = 20*damage;
+                EnemyRotationDamage = 20* pain;
             }
 
             //float damn 
