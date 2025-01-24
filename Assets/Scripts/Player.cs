@@ -160,16 +160,16 @@ public class Player : MonoBehaviour
             float pain = CURenemScript.getDamage();
             Invoke(nameof(stopImmune), .5f);
 
-            float PlayerVelocityDamge = damage* Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
-            float PlayerRotationDamage = damage* Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 50);
+            float PlayerVelocityDamge = pain * Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
+            float PlayerRotationDamage = pain * Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 50);
 
-            if (PlayerVelocityDamge > 20*damage)
+            if (PlayerVelocityDamge > 20* pain)
             {
-                PlayerVelocityDamge = 20*damage;
+                PlayerVelocityDamge = 20* pain;
             }
-            if (PlayerRotationDamage > 20*damage)
+            if (PlayerRotationDamage > 20* pain)
             {
-                PlayerRotationDamage = 20*damage;
+                PlayerRotationDamage = 20* pain;
             }
             
             Debug.Log("Player rotation damage: " + PlayerRotationDamage/4 + "  Player velocity Damage: " + PlayerVelocityDamge/4);//debug
