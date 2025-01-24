@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    public float maxhealth;
     public float health;
     public float damage;
 
@@ -49,7 +50,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.fillAmount = health / 100;
+        healthBar.fillAmount = (health / 100) / (maxhealth / 100);
 
         if (bottomRigid.angularVelocity < maxRotationVel)
         {
@@ -106,15 +107,15 @@ public class Enemy : MonoBehaviour
 
             Invoke(nameof(stopImmune), .5f);
 
-            float EnemyVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
-            float EnemyRotationDamage = Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
-            if(EnemyVelocityDamge>20)
+            float EnemyVelocityDamge = damage* Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
+            float EnemyRotationDamage = damage*Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
+            if(EnemyVelocityDamge>20*damage)
             {
-                EnemyVelocityDamge = 20;
+                EnemyVelocityDamge = 20*   damage;
             }
-            if (EnemyRotationDamage > 20)
+            if (EnemyRotationDamage > 20*damage)
             {
-                EnemyRotationDamage = 20;
+                EnemyRotationDamage = 20*damage;
             }
 
             //float damn 

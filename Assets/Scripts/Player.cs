@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public int maxhealth;
     public GameObject spinner;
     public GameObject topPiece;
     public GameObject bottomPiece;
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.fillAmount = health/100;
+        healthBar.fillAmount = (health/100)/(maxhealth / 100);
 
         deathParticles.transform.position = topPiece.transform.position;
 
@@ -155,16 +156,16 @@ public class Player : MonoBehaviour
 
             Invoke(nameof(stopImmune), .5f);
 
-            float PlayerVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
-            float PlayerRotationDamage = Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 50);
+            float PlayerVelocityDamge = damage* Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
+            float PlayerRotationDamage = damage* Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 50);
 
-            if (PlayerVelocityDamge > 20)
+            if (PlayerVelocityDamge > 20*damage)
             {
-                PlayerVelocityDamge = 20;
+                PlayerVelocityDamge = 20*damage;
             }
-            if (PlayerRotationDamage > 20)
+            if (PlayerRotationDamage > 20*damage)
             {
-                PlayerRotationDamage = 20;
+                PlayerRotationDamage = 20*damage;
             }
 
             Debug.Log("Player rotation damage: " + PlayerRotationDamage/4 + "  Player velocity Damage: " + PlayerVelocityDamge/4);//debug
