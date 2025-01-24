@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         {
             isImmune = true;
 
-            Invoke(nameof(stopImmune), .2f);
+            Invoke(nameof(stopImmune), .5f);
 
             dashCooldown = 3 * 60;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
@@ -147,11 +147,13 @@ public class Player : MonoBehaviour
     // }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Enemy Spike" || collision.gameObject.tag == "Enemy") && !isImmune)
+        if ((collision.gameObject.tag == "Enemy Spike" || collision.gameObject.tag == "Enemy") && isImmune== false)
         {
             //Debug.Log("hit");
             //health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - PlayersRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - PlayersRigid.linearVelocity.y)) / 5);
+            isImmune = true;
 
+            Invoke(nameof(stopImmune), .5f);
 
             float PlayerVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
             float PlayerRotationDamage = Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 50);
@@ -165,9 +167,9 @@ public class Player : MonoBehaviour
                 PlayerRotationDamage = 20;
             }
 
-            Debug.Log("Player rotation damage: " + PlayerRotationDamage/2 + "  Player velocity Damage: " + PlayerVelocityDamge/2);//debug
+            Debug.Log("Player rotation damage: " + PlayerRotationDamage/4 + "  Player velocity Damage: " + PlayerVelocityDamge/4);//debug
 
-            health -= (PlayerVelocityDamge + PlayerRotationDamage) / 2;
+            health -= ((PlayerVelocityDamge + PlayerRotationDamage) / 4);
 
             //topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
 
