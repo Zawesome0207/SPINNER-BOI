@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     [Header("Particle Effects")]
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
+    public ParticleSystem hitEffectPrefab;
 
 
     [Header("Debug - Runtime Filled")]
@@ -129,9 +130,10 @@ public class Enemy : MonoBehaviour
             health -= ((EnemyVelocityDamge+ EnemyRotationDamage)/4);
 
             //topRigid.linearVelocity += playersRigid.linearVelocity * 10;
-
-
         }
+
+        ParticleSystem hitEffect = Instantiate(hitEffectPrefab, collision.contacts[0].point, Quaternion.identity);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
