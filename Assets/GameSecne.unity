@@ -5583,9 +5583,9 @@ MonoBehaviour:
   rotationSpeed: 80
   maxRotationVel: 1500
   playersRigid: {fileID: 1899109448}
+  healthBar: {fileID: 1376503573}
   dashReadyParticles: {fileID: 1414695813}
   deathParticles: {fileID: 1717680613}
-  healthBar: {fileID: 1376503573}
 --- !u!255 &159044712
 FixedJoint2D:
   m_ObjectHideFlags: 0
