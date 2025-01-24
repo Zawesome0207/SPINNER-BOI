@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public int maxRotationVel;
     public float health;
     public Enemy currentBoss;
-    public Rigidbody2D enemysRigid;
+    //public Rigidbody2D enemysRigid;
     public float damage;
     public Camera cameras;
     public Image healthBar;
@@ -155,7 +155,9 @@ public class Player : MonoBehaviour
             //Debug.Log("hit");
             //health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - PlayersRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - PlayersRigid.linearVelocity.y)) / 5);
             isImmune = true;
-
+            Rigidbody2D enemysRigid = collision.gameObject.GetComponent<Rigidbody2D>();
+            Enemy CURenemScript = collision.gameObject.GetComponent<Enemy>();
+            float pain = CURenemScript.getDamage();
             Invoke(nameof(stopImmune), .5f);
 
             float PlayerVelocityDamge = damage* Mathf.Abs((topRigid.linearVelocityX - enemysRigid.linearVelocity.x) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - enemysRigid.linearVelocity.y) / topRigid.linearVelocityX + enemysRigid.linearVelocity.x));
@@ -169,7 +171,7 @@ public class Player : MonoBehaviour
             {
                 PlayerRotationDamage = 20*damage;
             }
-
+            
             Debug.Log("Player rotation damage: " + PlayerRotationDamage/4 + "  Player velocity Damage: " + PlayerVelocityDamge/4);//debug
 
             health -= ((PlayerVelocityDamge + PlayerRotationDamage) / 4);
