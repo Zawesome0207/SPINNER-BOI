@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,9 +25,12 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
 
+    public Image healthBar;
+
+    [Header("Particle Effects")]
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
-    public Image healthBar;
+
 
     [Header("Debug - Runtime Filled")]
     private bool isImmune;
