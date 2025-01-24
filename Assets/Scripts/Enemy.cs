@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
             {
                 EnemyRotationDamage = 20* pain;
             }
-
+            //hi
             //float damn 
             Debug.Log("Enemy rotation damage: "+ EnemyRotationDamage/4 + "  Enemy velocity Damage: "+ EnemyVelocityDamge/4);//debug
 
