@@ -19,9 +19,6 @@ public class Player : MonoBehaviour
     public Camera cameras;
     public Image healthBar;
 
-    public ParticleSystem dashReadyParticles;
-    public ParticleSystem deathParticles;
-
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
 
@@ -32,6 +29,11 @@ public class Player : MonoBehaviour
     public bool isImmune;
     public int dodgeCooldown;
     public float dashCooldown;
+
+    [Header("Particle Effects")]
+    public ParticleSystem dashReadyParticles;
+    public ParticleSystem deathParticles;
+    public ParticleSystem hitEffectPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -175,11 +177,9 @@ public class Player : MonoBehaviour
             //topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
 
             //topRigid.linearVelocity += enemysRigid.linearVelocity * 10;
-
-            
         }
-            
-            
+
+        ParticleSystem hitEffect = Instantiate(hitEffectPrefab, collision.contacts[0].point, Quaternion.identity);
     }
     public float getDamage()
     {

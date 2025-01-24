@@ -30565,11 +30565,12 @@ MonoBehaviour:
   damage: 1
   cameras: {fileID: 2100694807}
   healthBar: {fileID: 1646914910}
-  dashReadyParticles: {fileID: 248779502}
-  deathParticles: {fileID: 248779502}
   isImmune: 0
   dodgeCooldown: 0
   dashCooldown: 6
+  dashReadyParticles: {fileID: 248779502}
+  deathParticles: {fileID: 248779502}
+  hitEffectPrefab: {fileID: 808034142077215664, guid: 76d6f43fbb7432c45873ab840064d973, type: 3}
 --- !u!1 &1940706306
 GameObject:
   m_ObjectHideFlags: 0
