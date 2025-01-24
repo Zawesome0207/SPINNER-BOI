@@ -101,6 +101,11 @@ public class Enemy : MonoBehaviour
         //Debug.Log("Ehit");
         if ((collision.gameObject.tag == "Player Spike" || collision.gameObject.tag == "Player") && !isImmune)
         {
+
+            isImmune = true;
+
+            Invoke(nameof(stopImmune), .5f);
+
             float EnemyVelocityDamge = Mathf.Abs((topRigid.linearVelocityX - playersRigid.linearVelocity.x) / topRigid.linearVelocityX + playersRigid.linearVelocity.x) + (Mathf.Abs((topRigid.linearVelocityY - playersRigid.linearVelocity.y) / topRigid.linearVelocityX + playersRigid.linearVelocity.x));
             float EnemyRotationDamage = Mathf.Abs((playersRigid.angularVelocity) * playerScript.getDamage() / 50);
             if(EnemyVelocityDamge>20)
@@ -113,9 +118,9 @@ public class Enemy : MonoBehaviour
             }
 
             //float damn 
-            Debug.Log("Enemy rotation damage: "+ EnemyRotationDamage/2 + "  Enemy velocity Damage: "+ EnemyVelocityDamge/2);//debug
+            Debug.Log("Enemy rotation damage: "+ EnemyRotationDamage/4 + "  Enemy velocity Damage: "+ EnemyVelocityDamge/4);//debug
 
-            health -= (EnemyVelocityDamge+ EnemyRotationDamage)/2;
+            health -= ((EnemyVelocityDamge+ EnemyRotationDamage)/4);
 
             //topRigid.linearVelocity += playersRigid.linearVelocity * 10;
 
