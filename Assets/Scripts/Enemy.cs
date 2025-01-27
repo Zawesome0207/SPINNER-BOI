@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
     {
         deathParticles.gameObject.SetActive(true);
 
-        Destroy(GameObject.Find("EnemyTop"));
+        topPiece.gameObject.SetActive(false);
     }
 
     private void stopImmune()
