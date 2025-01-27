@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -95,9 +96,12 @@ public class Player : MonoBehaviour
         {
             dashReadyParticles.gameObject.SetActive(true);
         }
-        if (dashCooldown == 0 && Input.GetMouseButtonDown(0))
+        if (dashCooldown == 0 && Input.GetMouseButtonDown(0)&& dodgeCooldown< 2.4f*60)
         {
             isImmune = true;
+            
+            //GameObject.Find("Player").layer = LayerMask.NameToLayer("Dodging");
+
 
             Invoke(nameof(stopImmune), .5f);
 
@@ -117,7 +121,10 @@ public class Player : MonoBehaviour
         if (dodgeCooldown == 0 && Input.GetMouseButtonDown(1))
         {
             dodgeCooldown = 3 * 60;
-
+            isImmune = true;
+            Invoke(nameof(stopImmune), 1f);
+            topPiece.layer = 10;
+            bottomPiece.layer = 10;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
             dodgex=  mousePos.x - topPiece.transform.position.x;
             dodgey = mousePos.y - topPiece.transform.position.y;
@@ -191,6 +198,9 @@ public class Player : MonoBehaviour
     private void stopImmune()
     {
         isImmune = false;
+        //GameObject.Find("Dodging").layer = LayerMask.NameToLayer("Player");
+        topPiece.layer = 8;
+        bottomPiece.layer = 8;
     }
 
     private void death()
