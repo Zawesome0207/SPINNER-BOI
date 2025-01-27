@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         {
             dodgeCooldown = 3 * 60;
             isImmune = true;
-            Invoke(nameof(stopImmune), 1f);
+            Invoke(nameof(stopImmune), .24f);
             topPiece.layer = 10;
             bottomPiece.layer = 10;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
@@ -138,7 +138,9 @@ public class Player : MonoBehaviour
             //Debug.Log(1);
             topRigid.linearVelocity = new Vector2(dodgex * speed * .07f, dodgey * speed * .07f);
             bottomRigid.linearVelocity = new Vector2(dodgex * speed * .07f, dodgey * speed * .07f);
+            
         }
+        //if(dodgeCooldown)
 
         if (health <= 0)
         {
