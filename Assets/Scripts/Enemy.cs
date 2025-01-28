@@ -50,8 +50,6 @@ public class Enemy : MonoBehaviour
         topRigid = topPiece.GetComponent<Rigidbody2D>();
         bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
 
-        deathParticles.gameObject.SetActive(false);
-
         isImmune = false;
     }
 
@@ -78,7 +76,6 @@ public class Enemy : MonoBehaviour
         }
 
         deathParticles.transform.position = topPiece.transform.position;
-
     }
 
     private void resetDash()
@@ -153,9 +150,7 @@ public class Enemy : MonoBehaviour
 
     private void death()
     {
-        deathParticles.gameObject.SetActive(true);
-
-        Destroy(GameObject.Find("EnemyTop"));
+        topPiece.gameObject.SetActive(false);
     }
 
     private void stopImmune()

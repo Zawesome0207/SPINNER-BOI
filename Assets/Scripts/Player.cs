@@ -214,6 +214,6 @@ public class Player : MonoBehaviour
         deathParticles.gameObject.SetActive(true);
 
         //Destroy(GameObject.Find("PlayerTop"));
-        spinner.SetActive(false);
+        topPiece.SetActive(false);
     }
 }
