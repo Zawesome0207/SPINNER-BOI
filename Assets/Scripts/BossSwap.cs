@@ -8,6 +8,7 @@ public class BossSwap : MonoBehaviour
     public List<GameObject> Enemies;
     private GameObject currentEnemy;
     private Enemy currentEnemyScript;
+    private bool bossInPlay;
 
     [Header("Player")]
     public GameObject Player;
@@ -23,37 +24,51 @@ public class BossSwap : MonoBehaviour
         currentEnemyScript = currentEnemy.GetComponent<Enemy>();
 
         currentEnemy.SetActive(true);
+        bossInPlay = true;
 
         playerScript = Player.GetComponent<Player>();
     }
 
     private void Update()
     {
-        if (currentEnemyScript.health <= 0 && currentEnemy != null)
+        if (currentEnemyScript.health <= 0 && bossInPlay)
         {
             currentEnemyScript.deathParticles.Play();
+            bossInPlay = false;
 
             EnCount++;
 
             if(EnCount > Enemies.Capacity)
             {
-                currentEnemy = null;
-
                 Invoke(nameof(Win), 2);
             }
 
             else 
             {
-                playerScript.health = playerScript.maxhealth;
+                bringHealthBack();
 
-                currentEnemy.SetActive(false);
-
-                currentEnemy = Enemies[EnCount];
-                currentEnemyScript = currentEnemy.GetComponent<Enemy>();
-
-                currentEnemy.SetActive(true);
+                Invoke(nameof(nextBoss), 2);
             }
         }
+    }
+
+    private void bringHealthBack()
+    {
+        while(playerScript.health < playerScript.maxhealth)
+        {
+            playerScript.health += .1f;
+        }
+    }
+
+    private void nextBoss()
+    {
+        currentEnemy.SetActive(false);
+
+        currentEnemy = Enemies[EnCount];
+        currentEnemyScript = currentEnemy.GetComponent<Enemy>();
+
+        currentEnemy.SetActive(true);
+        bossInPlay = true;
     }
 
     private void Win()

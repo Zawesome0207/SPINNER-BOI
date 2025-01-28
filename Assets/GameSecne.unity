@@ -59536,7 +59536,7 @@ MonoBehaviour:
   - {fileID: 159044708}
   - {fileID: 495404742}
   - {fileID: 282265323}
-  Player: {fileID: 0}
+  Player: {fileID: 1899109444}
 --- !u!1 &1646914908
 GameObject:
   m_ObjectHideFlags: 0
@@ -70779,7 +70779,7 @@ MonoBehaviour:
   maxRotationVel: 1500
   health: 100
   currentBoss: {fileID: 2011997114}
-  damage: 1
+  damage: 5
   cameras: {fileID: 2100694807}
   healthBar: {fileID: 1646914910}
   isImmune: 0
