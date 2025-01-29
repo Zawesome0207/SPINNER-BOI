@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
             //GameObject.Find("Player").layer = LayerMask.NameToLayer("Dodging");
 
 
-            Invoke(nameof(stopImmune), .5f);
+            Invoke(nameof(stopImmune), 1f);
 
             dashCooldown = 3 * 60;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
