@@ -43883,7 +43883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1173362449
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61660,6 +61660,8 @@ MonoBehaviour:
   - {fileID: 159044708}
   - {fileID: 495404742}
   - {fileID: 282265323}
+  normHealth: {fileID: 1458144399}
+  finalHealth: {fileID: 1173362448}
   Player: {fileID: 1899109444}
 --- !u!1 &1646914908
 GameObject:
@@ -73016,7 +73018,7 @@ MonoBehaviour:
   maxRotationVel: 1500
   health: 100
   currentBoss: {fileID: 2011997114}
-  damage: 20
+  damage: 1
   cameras: {fileID: 2100694807}
   healthBar: {fileID: 1646914910}
   noiseMaker: {fileID: 843801113}

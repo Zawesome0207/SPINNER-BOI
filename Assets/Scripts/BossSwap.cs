@@ -14,6 +14,9 @@ public class BossSwap : MonoBehaviour
     private Enemy[] bosses;
     private bool[] hasPlayedDeathParticles;
 
+    public GameObject normHealth;
+    public GameObject finalHealth;
+
     [Header("Player")]
     public GameObject Player;
     private Player playerScript;
@@ -118,6 +121,8 @@ public class BossSwap : MonoBehaviour
         }
 
         Enemies[EnCount].SetActive(true);
+        normHealth.SetActive(false);
+        finalHealth.SetActive(true);
 
         finalBossActive = true;
     }
