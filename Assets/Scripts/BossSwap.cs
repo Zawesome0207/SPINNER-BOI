@@ -10,6 +10,10 @@ public class BossSwap : MonoBehaviour
     private Enemy currentEnemyScript;
     private bool bossInPlay;
 
+    private bool finalBossActive;
+    private Enemy[] bosses;
+    private bool[] hasPlayedDeathParticles;
+
     [Header("Player")]
     public GameObject Player;
     private Player playerScript;
@@ -27,6 +31,7 @@ public class BossSwap : MonoBehaviour
         currentEnemy.SetActive(true);
         bossInPlay = true;
 
+        finalBossActive = false;
         healPlayer = false;
 
         playerScript = Player.GetComponent<Player>();
@@ -41,9 +46,14 @@ public class BossSwap : MonoBehaviour
 
             EnCount++;
 
-            if(EnCount > Enemies.Capacity)
+            if(EnCount >= Enemies.Capacity)
             {
                 Invoke(nameof(Win), 2);
+            }
+
+            else if(EnCount == Enemies.Capacity - 1)
+            {
+                Invoke(nameof(finalBoss), 2);
             }
 
             else 
@@ -57,13 +67,30 @@ public class BossSwap : MonoBehaviour
             healPlayer = true;
         }
 
-        if(healPlayer)
+        if(healPlayer && !finalBossActive)
         {
-            playerScript.health += .3f;
-
             if(playerScript.health >= playerScript.maxhealth)
             {
                 healPlayer = false;
+            }
+
+            else
+            {
+                playerScript.health += .5f;
+            }
+        }
+
+        if(bosses != null)
+        {
+            int a = 0;
+            foreach (Enemy E in bosses)
+            {
+                if(E.health <= 0 && !hasPlayedDeathParticles[a])
+                {
+                    PlayFinalDeathParticles(E.deathParticles, a);
+                }
+
+                a++;
             }
         }
     }
@@ -77,6 +104,29 @@ public class BossSwap : MonoBehaviour
 
         currentEnemy.SetActive(true);
         bossInPlay = true;
+    }
+
+    private void finalBoss()
+    {
+        bosses = Enemies[EnCount].GetComponentsInChildren<Enemy>();
+
+        hasPlayedDeathParticles = new bool[bosses.Length];
+
+        for(int a = 0; a < bosses.Length -1; a++)
+        {
+            hasPlayedDeathParticles[a] = false;
+        }
+
+        Enemies[EnCount].SetActive(true);
+
+        finalBossActive = true;
+    }
+
+    private void PlayFinalDeathParticles(ParticleSystem particles, int a)
+    {
+        particles.Play();
+
+        hasPlayedDeathParticles[a] = true;
     }
 
     private void Win()
