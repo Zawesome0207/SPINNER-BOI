@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     float dodgex;
     float dodgey;
 
+    public AudioSource noiseMaker;
+    public AudioClip metalPipe;
+
     [Header("Debug - Runtime Filled")]
     public bool isImmune;
     public int dodgeCooldown;
@@ -103,7 +106,7 @@ public class Player : MonoBehaviour
             //GameObject.Find("Player").layer = LayerMask.NameToLayer("Dodging");
 
 
-            Invoke(nameof(stopImmune), .5f);
+            Invoke(nameof(stopImmune), 1f);
 
             dashCooldown = 3 * 60;
             Vector3 mousePos = cameras.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
@@ -159,6 +162,7 @@ public class Player : MonoBehaviour
     // }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        noiseMaker.PlayOneShot(metalPipe);
         if ((collision.gameObject.tag == "Enemy") && isImmune== false)
         {
             //Debug.Log("hit");

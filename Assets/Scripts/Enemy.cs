@@ -28,6 +28,9 @@ public class Enemy : MonoBehaviour
 
     public Image healthBar;
 
+    public AudioSource noiseMaker;
+    public AudioClip metalPipe;
+
     [Header("Particle Effects")]
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
@@ -102,6 +105,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Ehit");
+        noiseMaker.PlayOneShot(metalPipe);
         if ((collision.gameObject.tag == "Player Spike" || collision.gameObject.tag == "Player") && !isImmune)
         {
             float pain = playerScript.getDamage();
