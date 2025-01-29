@@ -13,6 +13,7 @@ public class BossSwap : MonoBehaviour
     [Header("Player")]
     public GameObject Player;
     private Player playerScript;
+    private bool healPlayer;
 
     private int EnCount;
 
@@ -25,6 +26,8 @@ public class BossSwap : MonoBehaviour
 
         currentEnemy.SetActive(true);
         bossInPlay = true;
+
+        healPlayer = false;
 
         playerScript = Player.GetComponent<Player>();
     }
@@ -45,18 +48,23 @@ public class BossSwap : MonoBehaviour
 
             else 
             {
-                bringHealthBack();
-
                 Invoke(nameof(nextBoss), 2);
             }
         }
-    }
 
-    private void bringHealthBack()
-    {
-        while(playerScript.health < playerScript.maxhealth)
+        if(!bossInPlay)
         {
-            playerScript.health += .1f;
+            healPlayer = true;
+        }
+
+        if(healPlayer)
+        {
+            playerScript.health += .3f;
+
+            if(playerScript.health >= playerScript.maxhealth)
+            {
+                healPlayer = false;
+            }
         }
     }
 
