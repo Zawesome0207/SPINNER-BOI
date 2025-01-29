@@ -6,8 +6,10 @@ public class ui : MonoBehaviour
     public GameObject player;
     public GameObject enemys;
     public GameObject sound;
+    public GameObject music;
     public GameObject puasePanel;
     int dumb = 0;
+    int dumbs = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,6 +67,23 @@ public class ui : MonoBehaviour
         }
         dumb++;
         
+    }
+    public void muteM()
+    {
+        if (dumbs % 2 == 0)
+        {
+            AudioSource hi = music.GetComponent<AudioSource>();
+            hi.volume = 0;
+            Debug.Log("mute");
+        }
+        else
+        {
+            AudioSource hi = music.GetComponent<AudioSource>();
+            hi.volume = 1;
+            Debug.Log("unmute");
+        }
+        dumbs++;
+
     }
     public void unmuteP()
     {
