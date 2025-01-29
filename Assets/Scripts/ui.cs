@@ -33,16 +33,20 @@ public class ui : MonoBehaviour
     }
     public void unpause()
     {
+        Time.timeScale = 1;
+        //Application.targetFrameRate = 60;
         puasePanel.SetActive(false);
-        player.gameObject.SetActive(true);
-        enemys.gameObject.SetActive(true);
+        //player.gameObject.SetActive(true);
+        //enemys.gameObject.SetActive(true);
         uistatus = false;
     }
     public void pause()
     {
+        Time.timeScale = 0;
+        //Application.targetFrameRate = 0;
         puasePanel.SetActive(true);
-        player.gameObject.SetActive(false);
-        enemys.gameObject.SetActive(false);
+        //player.gameObject.SetActive(false);
+        //enemys.gameObject.SetActive(false);
         uistatus = true;
     }
     public void muteP()
