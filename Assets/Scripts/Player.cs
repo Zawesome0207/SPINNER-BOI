@@ -163,7 +163,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         noiseMaker.PlayOneShot(metalPipe);
-        if ((collision.gameObject.tag == "Enemy") && isImmune== false)
+        if ((collision.gameObject.tag == "Enemy") && isImmune == false)
         {
             //Debug.Log("hit");
             //health -= Mathf.Abs((enemysRigid.angularVelocity) * currentBoss.getDamage() / 500) + ((Mathf.Abs(topRigid.linearVelocityX - PlayersRigid.linearVelocity.x) + Mathf.Abs(topRigid.linearVelocityY - PlayersRigid.linearVelocity.y)) / 5);
