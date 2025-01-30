@@ -72838,7 +72838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1740996778
 RectTransform:
   m_ObjectHideFlags: 0
@@ -73639,6 +73639,7 @@ MonoBehaviour:
   damage: 1
   cameras: {fileID: 2100694807}
   healthBar: {fileID: 1646914910}
+  uiScr: {fileID: 1339310703}
   noiseMaker: {fileID: 843801113}
   metalPipe: {fileID: 8300000, guid: 1ad61aa2c30798a41965f0ac08f6ac4d, type: 3}
   isImmune: 0
