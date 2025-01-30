@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D topRigid;
     private Rigidbody2D bottomRigid;
 
+    public ui uiScr;
+
     float dodgex;
     float dodgey;
 
@@ -212,8 +214,9 @@ public class Player : MonoBehaviour
     private void death()
     {
         deathParticles.gameObject.SetActive(true);
-
+        //uiScr.dead();
         //Destroy(GameObject.Find("PlayerTop"));
         topPiece.SetActive(false);
+        uiScr.dead();
     }
 }
