@@ -45,7 +45,8 @@ public class Enemy : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        canDash = true;
+        canDash = false;
+        Invoke(nameof(resetDash), dashCooldown);
 
         topRigid = topPiece.GetComponent<Rigidbody2D>();
         bottomRigid = bottomPiece.GetComponent<Rigidbody2D>();
