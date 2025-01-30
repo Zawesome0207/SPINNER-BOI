@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class ui : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ui : MonoBehaviour
     public GameObject puasePanel;
     int dumb = 0;
     int dumbs = 0;
+    public GameObject deadpan;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -93,6 +95,13 @@ public class ui : MonoBehaviour
     {
         Application.Quit();
     }
-
+    public void dead()
+    {
+        deadpan.SetActive(true);
+    }
+    public void resetart()
+    {
+        SceneManager.LoadScene("GameSecne");
+    }
 
 }
