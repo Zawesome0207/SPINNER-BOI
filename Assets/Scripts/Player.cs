@@ -36,11 +36,6 @@ public class Player : MonoBehaviour
     public int dodgeCooldown;
     public float dashCooldown;
 
-    [System.NonSerialized]
-    public bool canDash;
-    [System.NonSerialized]
-    public bool canDodge;
-
     [Header("Particle Effects")]
     public ParticleSystem dashReadyParticles;
     public ParticleSystem deathParticles;
@@ -52,6 +47,7 @@ public class Player : MonoBehaviour
         Application.targetFrameRate = 60;
 
         isImmune = false;
+        dashReadyParticles.gameObject.SetActive(false);
 
         dodgeCooldown = 3 * 60;
         dashCooldown = 3 * 60;
@@ -109,7 +105,7 @@ public class Player : MonoBehaviour
         {
             dashReadyParticles.gameObject.SetActive(true);
         }
-        if (dashCooldown == 0 && Input.GetMouseButtonDown(0)&& dodgeCooldown< 2.4f*60 && canDash)
+        if (dashCooldown == 0 && Input.GetMouseButtonDown(0)&& dodgeCooldown< 2.4f*60)
         {
             isImmune = true;
             
@@ -131,7 +127,7 @@ public class Player : MonoBehaviour
 
             dashReadyParticles.gameObject.SetActive(false);
         }
-        if (dodgeCooldown == 0 && Input.GetMouseButtonDown(1) && canDodge)
+        if (dodgeCooldown == 0 && Input.GetMouseButtonDown(1))
         {
             dodgeCooldown = 3 * 60;
             isImmune = true;

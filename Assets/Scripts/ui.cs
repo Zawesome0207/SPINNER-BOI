@@ -13,10 +13,13 @@ public class ui : MonoBehaviour
     public GameObject music;
     public GameObject puasePanel;
     public GameObject startPanel;
+    public GameObject instructionsPanelS;
+    public GameObject instructionsPanelP;
 
     int dumb = 0;
     int dumbs = 0;
     public GameObject deadpan;
+    public GameObject winPanel;
 
     private Player playerScript;
     private Enemy enemyScript;
@@ -36,10 +39,8 @@ public class ui : MonoBehaviour
 
         countDowns = countDownse.ToArray();
 
-        Time.timeScale = 0;
-
-        playerScript.canDash = false;
-        playerScript.canDodge = false;
+        enemyScript.enabled = false;
+        playerScript.enabled = false;
     }
 
     // Update is called once per frame
@@ -64,12 +65,35 @@ public class ui : MonoBehaviour
 
         countDowns[0].SetActive(true);
 
-        Time.timeScale = 1;
-        enemyScript.speed = 0;
-        playerScript.speed = 0;
-
         cntForDown = 1;
         Invoke(nameof(countDown), 1);
+    }
+
+    public void playInstructionsS()
+    {
+        startPanel.SetActive(false);
+
+        instructionsPanelS.SetActive(true);
+    }
+    public void playInstructionsP()
+    {
+        puasePanel.SetActive(false);
+
+        instructionsPanelP.SetActive(true);
+    }
+
+    public void backToStart()
+    {
+        startPanel.SetActive(true);
+
+        instructionsPanelS.SetActive(false); 
+    }
+
+    public void backToPause()
+    {
+        puasePanel.SetActive(true);
+
+        instructionsPanelP.SetActive(false);
     }
 
     public void unpause()
@@ -78,8 +102,8 @@ public class ui : MonoBehaviour
         puasePanel.SetActive(false);
         uistatus = false;
 
-        playerScript.canDash = true;
-        playerScript.canDodge = true;
+        playerScript.enabled = true;
+        enemyScript.enabled = true;
     }
     public void pause()
     {
@@ -87,8 +111,8 @@ public class ui : MonoBehaviour
         puasePanel.SetActive(true);
         uistatus = true;
 
-        playerScript.canDash = false;
-        playerScript.canDodge = false;
+        playerScript.enabled = false;
+        enemyScript.enabled = false;
     }
     public void muteP()
     {
@@ -136,6 +160,12 @@ public class ui : MonoBehaviour
     {
         deadpan.SetActive(true);
     }
+
+    public void Win()
+    {
+        winPanel.SetActive(true);
+    }
+
     public void resetart()
     {
         SceneManager.LoadScene("GameSecne");
@@ -143,24 +173,19 @@ public class ui : MonoBehaviour
 
     private void countDown()
     {
-        Debug.Log(cntForDown);
         countDowns[cntForDown - 1].SetActive(false);
 
-        if (cntForDown == countDowns.Length - 1)
+        if (cntForDown == countDowns.Length)
         {
-            Time.timeScale = 1;
-
-            enemyScript.speed = 0;
-            enemyScript.speed = 0;
-
-            playerScript.canDash = true;
-            playerScript.canDodge = true;
+            enemyScript.enabled = true;
+            playerScript.enabled = true;
         }
 
         else
         {
             countDowns[cntForDown].SetActive(true);
 
+            cntForDown++;
             Invoke(nameof(countDown), 1);
         }
     }

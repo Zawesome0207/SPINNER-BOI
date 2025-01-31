@@ -23,10 +23,15 @@ public class BossSwap : MonoBehaviour
     private bool healPlayer;
 
     private int EnCount;
+    private int finalDeathCnt;
+
+    [Header("Ui")]
+    public ui uiScript;
 
     private void Start()
     {
         EnCount = 0;
+        finalDeathCnt = 0;
 
         currentEnemy = Enemies[EnCount];
         currentEnemyScript = currentEnemy.GetComponent<Enemy>();
@@ -38,6 +43,9 @@ public class BossSwap : MonoBehaviour
         healPlayer = false;
 
         playerScript = Player.GetComponent<Player>();
+
+        currentEnemyScript.dashReadyParticles.gameObject.SetActive(false);
+        playerScript.dashReadyParticles.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -49,12 +57,7 @@ public class BossSwap : MonoBehaviour
 
             EnCount++;
 
-            if(EnCount >= Enemies.Capacity)
-            {
-                Invoke(nameof(Win), 2);
-            }
-
-            else if(EnCount == Enemies.Capacity - 1)
+            if(EnCount == Enemies.Capacity - 1)
             {
                 Invoke(nameof(finalBoss), 2);
             }
@@ -95,6 +98,11 @@ public class BossSwap : MonoBehaviour
 
                 a++;
             }
+
+            if (finalDeathCnt == bosses.Length)
+            {
+                Win();
+            }
         }
     }
 
@@ -131,12 +139,13 @@ public class BossSwap : MonoBehaviour
     {
         particles.Play();
 
+        finalDeathCnt++;
         hasPlayedDeathParticles[a] = true;
     }
 
     private void Win()
     {
-        Debug.Log("You Won!");
+        uiScript.Win();
 
         this.gameObject.SetActive(false);
     }
