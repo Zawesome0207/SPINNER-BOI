@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,11 +19,22 @@ public class ui : MonoBehaviour
     public GameObject deadpan;
 
     private Player playerScript;
+    private Enemy enemyScript;
+    public GameObject enemyObject;
+
+    public GameObject countDownParent;
+    private GameObject[] countDowns;
+    private int cntForDown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerScript = player.GetComponentInChildren<Player>();
+        enemyScript = enemyObject.GetComponent<Enemy>();
+
+        List<GameObject> countDownse = GetChildren(countDownParent);
+
+        countDowns = countDownse.ToArray();
 
         Time.timeScale = 0;
 
@@ -46,12 +60,16 @@ public class ui : MonoBehaviour
 
     public void play()
     {
-        Time.timeScale = 1;
-
         startPanel.SetActive(false);
 
-        playerScript.canDash = true;
-        playerScript.canDodge = true;
+        countDowns[0].SetActive(true);
+
+        Time.timeScale = 1;
+        enemyScript.speed = 0;
+        playerScript.speed = 0;
+
+        cntForDown = 1;
+        Invoke(nameof(countDown), 1);
     }
 
     public void unpause()
@@ -123,4 +141,37 @@ public class ui : MonoBehaviour
         SceneManager.LoadScene("GameSecne");
     }
 
+    private void countDown()
+    {
+        Debug.Log(cntForDown);
+        countDowns[cntForDown - 1].SetActive(false);
+
+        if (cntForDown == countDowns.Length - 1)
+        {
+            Time.timeScale = 1;
+
+            enemyScript.speed = 0;
+            enemyScript.speed = 0;
+
+            playerScript.canDash = true;
+            playerScript.canDodge = true;
+        }
+
+        else
+        {
+            countDowns[cntForDown].SetActive(true);
+
+            Invoke(nameof(countDown), 1);
+        }
+    }
+
+    public static List<GameObject> GetChildren(GameObject go)
+    {
+        List<GameObject> children = new List<GameObject>();
+        foreach (Transform tran in go.transform)
+        {
+            children.Add(tran.gameObject);
+        }
+        return children;
+    }
 }
